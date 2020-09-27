@@ -57,7 +57,7 @@ function App() {
   };
 
   const setDate = (date) => {
-    const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const months = [
       "January",
       "February",
