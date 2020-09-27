@@ -2,6 +2,13 @@ import React, { useState, useEffect } from "react";
 import GlobalStyle from "./style/base/globalStyles";
 import Theme from "./style/theme/theme";
 import { WiDayCloudy } from "react-icons/wi";
+import { WiNightSnowThunderstorm } from "react-icons/wi";
+import { RiDrizzleLine } from "react-icons/ri";
+import { WiRainMix } from "react-icons/wi";
+import { FaRegSnowflake } from "react-icons/fa";
+import { WiDayFog } from "react-icons/wi";
+import { BiSun } from "react-icons/bi";
+import { BsCloud } from "react-icons/bs";
 
 import {
   Container,
@@ -73,6 +80,35 @@ function App() {
     return todaysDate;
   };
 
+  const setWeatherIcon = (value) => {
+    switch (true) {
+      case value >= 200 && value <= 232:
+        <WiNightSnowThunderstorm />;
+        break;
+      case value >= 300 && value <= 321:
+        <RiDrizzleLine />;
+        break;
+      case value >= 500 && value <= 531:
+        <WiRainMix />;
+        break;
+      case value >= 600 && value <= 622:
+        <FaRegSnowflake />;
+        break;
+      case value >= 700 && value <= 781:
+        <WiDayFog />;
+        break;
+      case value === 800:
+        <BiSun />;
+        break;
+      case value >= 801 && value <= 804:
+        <BsCloud />;
+        break;
+
+      default:
+        return <BsCloud />;
+    }
+  };
+
   return (
     <>
       <GlobalStyle />
@@ -88,6 +124,7 @@ function App() {
             <Time>{setDate(new Date())}</Time>
             <Header>London</Header>
             <IconContainer>
+              {() => setWeatherIcon(600)}
               <WiDayCloudy />
             </IconContainer>
             <WeatherInfo>
