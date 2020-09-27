@@ -3,8 +3,9 @@ import { ThemeProvider } from "styled-components";
 
 const theme = {
   colors: {
-    darkGreen: "#02423E",
-    lightGreen: "#4DCCC6",
+    darkGreen: "#053532",
+    green: "#377571",
+    lightGreen: "#d2f9f7",
   },
 
   fontSizes: {
@@ -12,11 +13,12 @@ const theme = {
     medium: "2em",
     large: "3em",
   },
-  fontEright: {
+  fontWeight: {
+    xsLight: "200",
     light: "300",
     regular: "400",
     medium: "500",
-    bold: "700",
+    bold: "600",
   },
 };
 

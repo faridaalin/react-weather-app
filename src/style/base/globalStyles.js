@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
 }
 html, body {
     background: #ECFAF9;
-    font-family: 'Montserrat Alternates', sans-serif;
+    font-family: 'Epilogue', sans-serif;    
     overflow-x: hidden;
     height: 100%;
   }
