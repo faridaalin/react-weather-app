@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import GlobalStyle from "./style/base/globalStyles";
 import Theme from "./style/theme/theme";
-import { WiDayCloudy } from "react-icons/wi";
 import { WiNightSnowThunderstorm } from "react-icons/wi";
 import { RiDrizzleLine } from "react-icons/ri";
 import { WiRainMix } from "react-icons/wi";
@@ -42,7 +41,6 @@ function App() {
         const res = await fetch(URL_API);
         const data = await res.json();
         setWeather(data);
-        setQuery("");
       } catch {
         console.error();
       }
@@ -50,9 +48,11 @@ function App() {
     fetchWeather(weatherApi);
   }, [query, weatherApi]);
 
-  const handleKeyup = (e) => {
+  const handleKeypress = (e) => {
     if (e.key === "Enter") {
-      setQuery(e.target.value.trim());
+      let value = e.target.value;
+      setQuery(value.trim());
+      value = "";
     }
   };
 
@@ -83,31 +83,53 @@ function App() {
   const setWeatherIcon = (value) => {
     switch (true) {
       case value >= 200 && value <= 232:
-        <WiNightSnowThunderstorm />;
+        return <WiNightSnowThunderstorm />;
         break;
       case value >= 300 && value <= 321:
-        <RiDrizzleLine />;
+        return <RiDrizzleLine />;
         break;
       case value >= 500 && value <= 531:
-        <WiRainMix />;
+        return <WiRainMix />;
         break;
       case value >= 600 && value <= 622:
-        <FaRegSnowflake />;
+        return <FaRegSnowflake />;
         break;
       case value >= 700 && value <= 781:
-        <WiDayFog />;
+        return <WiDayFog />;
         break;
       case value === 800:
-        <BiSun />;
+        return <BiSun />;
         break;
       case value >= 801 && value <= 804:
-        <BsCloud />;
+        return <BsCloud />;
         break;
 
       default:
         return <BsCloud />;
     }
   };
+
+  const calCelcius = (temp) => {
+    let celcius = Math.floor(temp - 273.15);
+    return celcius;
+  };
+
+  const getTimeFromDate = (timestamp) => {
+    const date = new Date(timestamp * 1000);
+    const hours = date.getHours();
+    const min = date.getMinutes();
+    return `${hours}:${min}`;
+  };
+
+  if (!weather.weather) {
+    return (
+      <SearchField
+        placeholder="Search by city"
+        type="search"
+        onKeyPress={handleKeypress}
+      />
+    );
+  }
 
   return (
     <>
@@ -118,32 +140,33 @@ function App() {
             <SearchField
               placeholder="Search by city"
               type="text"
-              onKeyUp={handleKeyup}
+              onKeyPress={handleKeypress}
             />
 
             <Time>{setDate(new Date())}</Time>
-            <Header>London</Header>
+            <Header>
+              {weather.name}, {weather.sys.country}
+            </Header>
             <IconContainer>
-              {() => setWeatherIcon(600)}
-              <WiDayCloudy />
+              {setWeatherIcon(weather.weather[0].id)}
             </IconContainer>
             <WeatherInfo>
-              <SubHeading>Sunny</SubHeading>
-              <Temperature>28°</Temperature>
+              <SubHeading>{weather.weather[0].main}</SubHeading>
+              <Temperature>{calCelcius(weather.main.temp)}°</Temperature>
 
               <MinMaxTemp>
-                <span>Min 19°</span>
-                <span>Max 32°</span>
+                <span>Min {calCelcius(weather.main.temp_max)}°</span>
+                <span>Max {calCelcius(weather.main.temp_min)}°</span>
               </MinMaxTemp>
             </WeatherInfo>
 
             <SunsetSunrise className="sunset-sunrise">
               <Daylength>
-                <p>6:35AM</p>
+                <p>{getTimeFromDate(weather.sys.sunrise)}</p>
                 <p>SUNRISE</p>
               </Daylength>
               <Daylength>
-                <p>8:35PM</p>
+                <p>{getTimeFromDate(weather.sys.sunset)}</p>
                 <p>SUNSET</p>
               </Daylength>
             </SunsetSunrise>

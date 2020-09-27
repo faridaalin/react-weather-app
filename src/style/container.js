@@ -84,4 +84,5 @@ export const Daylength = styled.div`
   background: #d2f9f7;
   padding: 12px;
   font-size: 16px;
+  box-shadow: 0px 0px 20px #a4bbe6;
 `;
