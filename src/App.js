@@ -84,25 +84,23 @@ function App() {
     switch (true) {
       case value >= 200 && value <= 232:
         return <WiNightSnowThunderstorm />;
-        break;
       case value >= 300 && value <= 321:
         return <RiDrizzleLine />;
-        break;
+
       case value >= 500 && value <= 531:
         return <WiRainMix />;
-        break;
+
       case value >= 600 && value <= 622:
         return <FaRegSnowflake />;
-        break;
+
       case value >= 700 && value <= 781:
         return <WiDayFog />;
-        break;
+
       case value === 800:
         return <BiSun />;
-        break;
+
       case value >= 801 && value <= 804:
         return <BsCloud />;
-        break;
 
       default:
         return <BsCloud />;
