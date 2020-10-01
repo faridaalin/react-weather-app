@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { ClipLoader } from "react-spinners";
 import GlobalStyle from "./style/base/globalStyles";
 import setDate from "./utils/setDate";
-import API_KEY from "./utils/settings";
 import calCelcius from "./utils/calCelcius";
 import getTime from "./utils/getTime";
 import setWeatherIcon from "./functions/setWeatherIcon";
 import Theme from "./style/theme/theme";
+import apiConfig from "./utils/apiConfig";
 
 import {
   Container,
@@ -24,14 +24,12 @@ import {
   LoaderContainer,
 } from "./style/container";
 
-import "./App.css";
-
 function App() {
   const [loader, setLoader] = useState(false);
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState({});
 
-  const weatherApi = `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${API_KEY}`;
+  const weatherApi = `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${apiConfig.API_KEY}`;
 
   useEffect(() => {
     if (!query) return;
@@ -118,7 +116,7 @@ function App() {
                 {setWeatherIcon(weather.weather[0].id)}
               </IconContainer>
               <WeatherInfo>
-                <SubHeading>{weather.weather[0].main}</SubHeading>
+                <SubHeading>{weather.weather[0].description}</SubHeading>
                 <Temperature>{calCelcius(weather.main.temp)}°</Temperature>
 
                 <MinMaxTemp>
