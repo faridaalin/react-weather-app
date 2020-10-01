@@ -73,7 +73,7 @@ function App() {
             </LoaderContainer>
 
             <div>
-              City with the name "{query}" not found. Please, try again!
+              City with the name "{query}" is not found. Please, try again!
             </div>
           </Container>
         </Theme>
