@@ -1,6 +1,3 @@
-import React from "react";
-import { IconContext } from "react-icons";
-
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -10,6 +7,7 @@ export const Container = styled.div`
   box-shadow: -3px -3px 7px 0px #f3ecec45, -3px -1px 7px 0px #71707085,
     3px 3px 5px rgb(94 104 121 / 67%);
   border-radius: 15px;
+  margin-top: 42px;
 `;
 
 export const SearchField = styled.input`
@@ -36,20 +34,13 @@ export const Header = styled.h1`
   color: ${({ theme }) => theme.colors.green};
 `;
 
-const MyProvider = ({ className, children }) => (
-  <IconContext.Provider value={{ className }}>{children}</IconContext.Provider>
-);
-
-export const MyProviderStyled = styled(MyProvider)`
-  font-size: 150px;
-  color: ${({ theme }) => theme.colors.darkGreen};
-`;
-
 export const IconContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 32px 0;
+  font-size: 150px;
+  color: ${({ theme }) => theme.colors.darkGreen};
 `;
 export const WeatherInfo = styled.div`
   display: flex;

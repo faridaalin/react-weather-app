@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import apiConfig from "./utils/apiConfig";
-import SearchBox from "./components/SearchBox";
 import WeatherInterface from "./components/WeatherInterface";
+import GlobalStyle from "./style/base/globalStyles";
+import Theme from "./style/theme/theme";
+import { Container, SearchField } from "./style/container";
 
 function App() {
   const [loader, setLoader] = useState(false);
@@ -38,21 +40,26 @@ function App() {
     }
   };
 
-  return query ? (
-    weatherData && weatherData.name ? (
-      <WeatherInterface
-        handleKeypress={handleKeypress}
-        {...weatherData}
-        loader={loader}
-      />
-    ) : (
-      <SearchBox
-        message={`City with the name '${query}' does not exist.`}
-        handleKeypress={handleKeypress}
-      />
-    )
-  ) : (
-    <SearchBox message="" handleKeypress={handleKeypress} />
+  return (
+    <>
+      <GlobalStyle />
+      <Theme>
+        <Container>
+          <SearchField
+            placeholder="Search by city"
+            type="search"
+            onKeyPress={handleKeypress}
+          />
+          {query ? (
+            weatherData && weatherData.name ? (
+              <WeatherInterface {...weatherData} loader={loader} />
+            ) : (
+              <div>City with the name '{query}' does not exist.</div>
+            )
+          ) : null}
+        </Container>
+      </Theme>
+    </>
   );
 }
 
