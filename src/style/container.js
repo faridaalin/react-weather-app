@@ -90,8 +90,10 @@ export const Daylength = styled.div`
   font-size: 16px;
   box-shadow: 0px 0px 20px #a4bbe6;
 `;
+
 export const LoaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 88%;
 `;

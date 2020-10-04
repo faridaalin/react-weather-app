@@ -21,13 +21,15 @@ import {
     MinMaxTemp,
     SunsetSunrise,
     Daylength,
+
     LoaderContainer,
 } from "../style/container";
 
 export default function WeatherInterface({ handleKeypress, loader, ...weatherData }) {
+
     return (
         <>
-            {console.log(weatherData.weather[0] !== undefined)}
+
             <GlobalStyle />
             <Theme>
                 <MyProviderStyled>
@@ -38,37 +40,42 @@ export default function WeatherInterface({ handleKeypress, loader, ...weatherDat
                             onKeyPress={handleKeypress}
                         />
 
-                        <LoaderContainer>
-                            <ClipLoader color="#053532" loading={loader} />
-                        </LoaderContainer>
+                        {(loader)
+                            ? (
+                                <LoaderContainer>
+                                    <ClipLoader color="#053532" loading={loader} />
+                                </LoaderContainer>
+                            )
+                            : (<div>
+                                <Time>{setDate(new Date())}</Time>
+                                <Header>
+                                    {weatherData.name}, {weatherData.sys.country}
+                                </Header>
+                                <IconContainer>
+                                    {setWeatherIcon(weatherData.weather[0].id)}
+                                </IconContainer>
+                                <WeatherInfo>
+                                    <SubHeading>{weatherData.weather[0].description}</SubHeading>
+                                    <Temperature>{calCelcius(weatherData.main.temp)}°</Temperature>
 
-                        <Time>{setDate(new Date())}</Time>
-                        <Header>
-                            {weatherData.name}, {weatherData.sys.country}
-                        </Header>
-                        <IconContainer>
-                            {setWeatherIcon(weatherData.weather[0].id)}
-                        </IconContainer>
-                        <WeatherInfo>
-                            <SubHeading>{weatherData.weather[0].description}</SubHeading>
-                            <Temperature>{calCelcius(weatherData.main.temp)}°</Temperature>
+                                    <MinMaxTemp>
+                                        <span>Min {calCelcius(weatherData.main.temp_max)}°</span>
+                                        <span>Max {calCelcius(weatherData.main.temp_min)}°</span>
+                                    </MinMaxTemp>
+                                </WeatherInfo>
 
-                            <MinMaxTemp>
-                                <span>Min {calCelcius(weatherData.main.temp_max)}°</span>
-                                <span>Max {calCelcius(weatherData.main.temp_min)}°</span>
-                            </MinMaxTemp>
-                        </WeatherInfo>
-
-                        <SunsetSunrise className="sunset-sunrise">
-                            <Daylength>
-                                <p>{getTime(weatherData.sys.sunrise)}</p>
-                                <p>SUNRISE</p>
-                            </Daylength>
-                            <Daylength>
-                                <p>{getTime(weatherData.sys.sunset)}</p>
-                                <p>SUNSET</p>
-                            </Daylength>
-                        </SunsetSunrise>
+                                <SunsetSunrise className="sunset-sunrise">
+                                    <Daylength>
+                                        <p>{getTime(weatherData.sys.sunrise)}</p>
+                                        <p>SUNRISE</p>
+                                    </Daylength>
+                                    <Daylength>
+                                        <p>{getTime(weatherData.sys.sunset)}</p>
+                                        <p>SUNSET</p>
+                                    </Daylength>
+                                </SunsetSunrise>
+                            </div>)
+                        }
                     </Container>
                 </MyProviderStyled>
             </Theme>
