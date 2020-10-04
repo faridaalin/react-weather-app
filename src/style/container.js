@@ -7,6 +7,9 @@ export const Container = styled.div`
   width: 375px;
   height: 812px;
   padding: 36px;
+  box-shadow: -3px -3px 7px 0px #f3ecec45, -3px -1px 7px 0px #71707085,
+    3px 3px 5px rgb(94 104 121 / 67%);
+  border-radius: 15px;
 `;
 
 export const SearchField = styled.input`

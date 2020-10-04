@@ -27,6 +27,7 @@ import {
 export default function WeatherInterface({ handleKeypress, loader, ...weatherData }) {
     return (
         <>
+            {console.log(weatherData.weather[0] !== undefined)}
             <GlobalStyle />
             <Theme>
                 <MyProviderStyled>
