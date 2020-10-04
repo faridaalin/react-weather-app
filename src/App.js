@@ -38,26 +38,22 @@ function App() {
     }
   };
 
-  if (query) {
-    if (weatherData && weatherData.name) {
-      return (
-        <WeatherInterface
-          handleKeypress={handleKeypress}
-          {...weatherData}
-          loader={loader}
-        />
-      );
-    } else {
-      return (
-        <SearchBox
-          message={`City with the name '${query}' does not exist.`}
-          handleKeypress={handleKeypress}
-        />
-      );
-    }
-  } else {
-    return <SearchBox message="" handleKeypress={handleKeypress} />;
-  }
+  return query ? (
+    weatherData && weatherData.name ? (
+      <WeatherInterface
+        handleKeypress={handleKeypress}
+        {...weatherData}
+        loader={loader}
+      />
+    ) : (
+      <SearchBox
+        message={`City with the name '${query}' does not exist.`}
+        handleKeypress={handleKeypress}
+      />
+    )
+  ) : (
+    <SearchBox message="" handleKeypress={handleKeypress} />
+  );
 }
 
 export default App;
