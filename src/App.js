@@ -42,6 +42,7 @@ function App() {
 
   return (
     <>
+      {console.log(query)}
       <GlobalStyle />
       <Theme>
         <Container>
@@ -50,13 +51,11 @@ function App() {
             type="search"
             onKeyPress={handleKeypress}
           />
-          {query ? (
-            weatherData && weatherData.name ? (
-              <WeatherInterface {...weatherData} loader={loader} />
-            ) : (
-              <div>City with the name '{query}' does not exist.</div>
-            )
-          ) : null}
+          {weatherData && weatherData.name ? (
+            <WeatherInterface {...weatherData} loader={loader} />
+          ) : (
+            <div>{!query ? null : query + " Is not a city"}</div>
+          )}
         </Container>
       </Theme>
     </>
